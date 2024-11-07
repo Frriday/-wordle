@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.jkq.demo.jkq.mapper.AnswersMapper">
+    <select id="selectAnswerByDate" resultType="cn.jkq.demo.jkq.poj.Answer">
+        select answer_date, answer_solution from answers where answer_date = #{answerDate}
+    </select>
+
+    <select id="selectAnswers" resultType="cn.jkq.demo.jkq.poj.Answer">
+        select answer_date, answer_solution from answers
+    </select>
+    
+    <insert id="insertAnswer">
+        insert into answers (answer_date, answer_solution) values(#{answerDate}, #{answerSolution})
+    </insert>
+
+    <delete id="deleteAnswer">
+        delete from answers where answer_date = #{date}
+    </delete>
+
+    <update id="updateAnswer">
+        update answers
+        <set>
+            <if test="answerDate != null">
+                answer_date = #{answerDate},
+            </if>
+            <if test="answerSolution != null">
+                answer_solution = #{answerSolution}
+            </if>
+        </set>
+        where answer_date = #{answerDate}
+    </update>
+</mapper>
